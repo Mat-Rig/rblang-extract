@@ -226,7 +226,7 @@ class App extends React.Component {
           relationship.canAdd,
           relationship.askable,
           relationship.allowCF,
-          relationship.qPrompt
+          relationship.qPrompts[0]
         ]));
 
 
@@ -247,6 +247,7 @@ class App extends React.Component {
 
       }
       
+      console.log(this.state.compil)
     
 
       return (

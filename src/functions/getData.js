@@ -1,5 +1,6 @@
 //TODO
   //meta data feature
+  //Datasource
 
 
 
@@ -112,7 +113,7 @@ function getData(data) {
       parameterTags.forEach((item,index) => {
         //if statement to  check if the parameter is referenced in the rblang, some parameters are optional//
         if (data.slice(0,data.indexOf(mainTags.end)).indexOf(item) === -1 || data.slice(0,data.indexOf('/>')).indexOf(item) === -1) {
-          object[objectIndex][parameters[index]] = 0
+          object[objectIndex][parameters[index]] = 0;
         } else {
           const min = data.indexOf(item) + (item.length);
           const max = data.slice(min).indexOf('\\"') + min;
@@ -136,10 +137,11 @@ function getData(data) {
             const qPromptsIndex = object[objectIndex].qPrompts.length;
             const qmin = data.indexOf(`<${item}>`) + item.length + 2;
             const qmax = data.slice(qmin).indexOf(`</${item}>`) + qmin;
-            object[objectIndex].qPrompts[qPromptsIndex] = {
+            object[objectIndex].qPrompts[qPromptsIndex] = data.slice(qmin, qmax).replace(/,/g,';');
+            /*{
               form: item,
               prompt: data.slice(qmin, qmax).replace(/,/g,';') //replace to remove all commas, commas then breaks the CSV export//
-            }; 
+            }; */
           };
         })
       }
